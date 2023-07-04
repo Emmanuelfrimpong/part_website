@@ -1,9 +1,9 @@
+import 'package:auto_animated/auto_animated.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:part_website/utils/site_colors.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
-
 import '../../../../generated/assets.dart';
 
 class LandingPage extends StatefulWidget {
@@ -84,80 +84,117 @@ class _LandingPageState extends State<LandingPage> {
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.all(25),
-                              child: AnimatedContainer(
-                                duration: const Duration(seconds: 1),
-                                curve: Curves.easeInOut,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Make an "imPART"',
-                                      style: GoogleFonts.openSans(
-                                        fontSize: width * .05,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    RichText(
-                                        text: TextSpan(children: [
-                                      TextSpan(
-                                        text:
-                                            'We provide opportunities for global Educators to make a positive ',
-                                        style: GoogleFonts.openSans(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: '\"imPART\"',
-                                        style: GoogleFonts.aBeeZee(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold,
-                                          color: secondaryColor,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text:
-                                            ' on their students, host schools, and local communities.',
-                                        style: GoogleFonts.openSans(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ])),
-                                    const SizedBox(height: 20),
-                                    Text(
-                                      'PART understands that experience matters. That\'s why we recruit highly qualified and experienced teachers',
-                                      style: GoogleFonts.openSans(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    TextButton(
-                                        style: TextButton.styleFrom(
-                                          backgroundColor: secondaryColor,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 30, vertical: 20),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(0),
-                                          ),
-                                        ),
-                                        onPressed: () {},
-                                        child: Text(
-                                          ' Read More ',
-                                          style: GoogleFonts.openSans(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AnimateIfVisible(
+                                      key: const Key('item.1'),
+                                      reAnimateOnVisibility: false,
+                                      visibleFraction: .3,
+                                      duration:
+                                          const Duration(milliseconds: 150),
+                                      builder: (BuildContext context,
+                                          Animation<double> animation) {
+                                        return SlideTransition(
+                                          position: Tween<Offset>(
+                                            begin: const Offset(0.5, 0),
+                                            end: Offset.zero,
+                                          ).animate(animation),
+                                          child: Text(
+                                            'Make an "imPART"',
+                                            style: GoogleFonts.openSans(
+                                              fontSize: width * .05,
+                                              fontWeight: FontWeight.bold,
                                               color: Colors.white,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ))
-                                  ],
-                                ),
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                  AnimateIfVisible(
+                                      key: const Key('item.2'),
+                                      reAnimateOnVisibility: false,
+                                      visibleFraction: .3,
+                                      duration:
+                                          const Duration(milliseconds: 150),
+                                      builder: (BuildContext context,
+                                          Animation<double> animation) {
+                                        return SlideTransition(
+                                          position: Tween<Offset>(
+                                            begin: const Offset(-0.5, 0),
+                                            end: Offset.zero,
+                                          ).animate(animation),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 100),
+                                            child: Column(
+                                              children: [
+                                                RichText(
+                                                    text: TextSpan(children: [
+                                                  TextSpan(
+                                                    text:
+                                                        'We provide opportunities for global Educators to make a positive ',
+                                                    style: GoogleFonts.openSans(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text: '\"imPART\"',
+                                                    style: GoogleFonts.aBeeZee(
+                                                      fontSize: 22,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: secondaryColor,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        ' on their students, host schools, and local communities.',
+                                                    style: GoogleFonts.openSans(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ])),
+                                                const SizedBox(height: 20),
+                                                Text(
+                                                  'PART understands that experience matters. That\'s why we recruit highly qualified and experienced teachers',
+                                                  style: GoogleFonts.openSans(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                  const SizedBox(height: 20),
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                        backgroundColor: secondaryColor,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 30, vertical: 20),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(0),
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: Text(
+                                        ' Read More ',
+                                        style: GoogleFonts.openSans(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ))
+                                ],
                               ),
                             ),
                           ),
@@ -198,54 +235,86 @@ class _LandingPageState extends State<LandingPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              'Make an imPART',
-                              style: GoogleFonts.openSans(
-                                fontSize: width * .1,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                    text:
-                                        'We provide opportunities for global Educators to make a positive ',
-                                    style: GoogleFonts.openSans(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
+                            AnimateIfVisible(
+                                key: const Key('item.1'),
+                                reAnimateOnVisibility: false,
+                                visibleFraction: .3,
+                                duration: const Duration(milliseconds: 150),
+                                builder: (BuildContext context,
+                                    Animation<double> animation) {
+                                  return SlideTransition(
+                                    position: Tween<Offset>(
+                                      begin: const Offset(0.5, 0),
+                                      end: Offset.zero,
+                                    ).animate(animation),
+                                    child: Text(
+                                      'Make an imPART',
+                                      style: GoogleFonts.openSans(
+                                        fontSize: width * .1,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                  TextSpan(
-                                    text: '"imPART"',
-                                    style: GoogleFonts.aBeeZee(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
-                                      color: secondaryColor,
+                                  );
+                                }),
+                            AnimateIfVisible(
+                                key: const Key('item.2'),
+                                reAnimateOnVisibility: false,
+                                visibleFraction: .3,
+                                duration: const Duration(milliseconds: 150),
+                                builder: (BuildContext context,
+                                    Animation<double> animation) {
+                                  return SlideTransition(
+                                    position: Tween<Offset>(
+                                      begin: const Offset(-0.5, 0),
+                                      end: Offset.zero,
+                                    ).animate(animation),
+                                    child: Column(
+                                      children: [
+                                        RichText(
+                                            textAlign: TextAlign.center,
+                                            text: TextSpan(children: [
+                                              TextSpan(
+                                                text:
+                                                    'We provide opportunities for global Educators to make a positive ',
+                                                style: GoogleFonts.openSans(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: '"imPART"',
+                                                style: GoogleFonts.aBeeZee(
+                                                  fontSize: 30,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: secondaryColor,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    ' on their students, host schools, and local communities.',
+                                                style: GoogleFonts.openSans(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ])),
+                                        const SizedBox(height: 20),
+                                        Text(
+                                          'PART understands that experience matters. That\'s why we recruit highly qualified and experienced teachers',
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.openSans(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  TextSpan(
-                                    text:
-                                        ' on their students, host schools, and local communities.',
-                                    style: GoogleFonts.openSans(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ])),
-                            const SizedBox(height: 20),
-                            Text(
-                              'PART understands that experience matters. That\'s why we recruit highly qualified and experienced teachers',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.openSans(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
+                                  );
+                                }),
                             const SizedBox(height: 20),
                             TextButton(
                                 style: TextButton.styleFrom(

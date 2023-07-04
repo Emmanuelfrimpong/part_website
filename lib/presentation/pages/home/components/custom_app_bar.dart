@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:part_website/utils/site_colors.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
+import '../../../../config/routes/router.dart';
 import '../../../../generated/assets.dart';
 import '../../../../global/enum.dart';
 import '../../../../services/state/navigation_state.dart';
@@ -31,13 +33,20 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
         child: Row(
           children: [
             const SizedBox(width: 15),
-            Image.asset(
-              Assets.logoLogoNoText,
-              height: device.isDesktop
-                  ? 60
-                  : device.isTablet
-                      ? 70
-                      : 40,
+            InkWell(
+              onTap: () {
+                ref.read(homeNavigationProvider.notifier).state = Pages.home;
+                AutoRouter.of(context).pushAndPopUntil(const HomeRoute(),
+                    predicate: (route) => false);
+              },
+              child: Image.asset(
+                Assets.logoLogoNoText,
+                height: device.isDesktop
+                    ? 60
+                    : device.isTablet
+                        ? 70
+                        : 40,
+              ),
             ),
             const Spacer(),
             if (device.screenWidth < 1000)
@@ -66,7 +75,8 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                     onPressed: () {
                       ref.read(homeNavigationProvider.notifier).state =
                           Pages.home;
-                      //AutoRouter.of(context).pushAndPopUntil(const HomeRoute(), predicate: (route) => false);
+                      AutoRouter.of(context).pushAndPopUntil(const HomeRoute(),
+                          predicate: (route) => false);
                     },
                     isSelected: navigationState == Pages.home,
                     child: Text(
@@ -196,16 +206,29 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                   ),
                   TextButton(
                       style: TextButton.styleFrom(
-                          backgroundColor: primaryColor,
+                          backgroundColor: navigationState == Pages.login
+                              ? Colors.white
+                              : primaryColor,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 25, vertical: 15),
                           shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  color: navigationState == Pages.login
+                                      ? primaryColor
+                                      : Colors.white,
+                                  width: 1),
                               borderRadius: BorderRadius.circular(0))),
-                      onPressed: () {},
+                      onPressed: () {
+                        ref.read(homeNavigationProvider.notifier).state =
+                            Pages.login;
+                        AutoRouter.of(context).push(const LoginRoute());
+                      },
                       child: Text(
                         'Login',
                         style: GoogleFonts.openSans(
-                          color: Colors.white,
+                          color: navigationState == Pages.login
+                              ? primaryColor
+                              : Colors.white,
                           fontSize: 18,
                         ),
                       )),

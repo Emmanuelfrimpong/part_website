@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:part_website/utils/site_colors.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
-import '../../../generated/assets.dart';
+import '../../../../generated/assets.dart';
 
 class FooterSection extends StatelessWidget {
   const FooterSection({super.key});

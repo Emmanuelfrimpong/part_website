@@ -1,11 +1,12 @@
+import 'package:auto_animated/auto_animated.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:part_website/presentation/pages/home/sections/info_section.dart';
 
 import '../../../services/state/navigation_state.dart';
-import '../action_section/action_section.dart';
-import '../footer/footer_section.dart';
+import 'sections/action_section.dart';
+import 'sections/footer_section.dart';
 import 'components/custom_app_bar.dart';
 import 'sections/landing_page.dart';
 
@@ -41,15 +42,20 @@ class _HomePageState extends ConsumerState<HomePage> {
       body: Stack(
         children: [
           // Positioned(top: 0, child: CustomAppBar()),
-          SingleChildScrollView(
+          AnimateIfVisibleWrapper(
+            // Show each item through (default 250)
             controller: _scrollController,
-            child: const Column(
-              children: [
-                LandingPage(),
-                ActionSection(),
-                InfoSection(),
-                FooterSection(),
-              ],
+            showItemInterval: const Duration(milliseconds: 200),
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: const Column(
+                children: [
+                  LandingPage(),
+                  ActionSection(),
+                  InfoSection(),
+                  FooterSection(),
+                ],
+              ),
             ),
           ),
           const Positioned(top: -5, left: -5, child: CustomAppBar()),
