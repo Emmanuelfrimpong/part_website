@@ -12,7 +12,6 @@ class FooterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var device = ResponsiveBreakpoints.of(context);
-    print(device.screenWidth);
     return Column(
       children: [
         Container(
@@ -31,10 +30,15 @@ class FooterSection extends StatelessWidget {
                 children: [
                   if (device.screenWidth < 900)
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          Assets.logoLogoWhite,
-                          width: device.screenWidth * 0.3,
+                        Align(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            Assets.logoLogoWhite,
+                            width: device.screenWidth * 0.3,
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
@@ -373,6 +377,7 @@ class FooterSection extends StatelessWidget {
                                       ),
                                       subtitle: Text(
                                         'COLUMBIA – SOUTH CAROLINA',
+                                        maxLines: 1,
                                         style: GoogleFonts.openSans(
                                           color: Colors.white,
                                           fontSize: 16,
@@ -464,6 +469,7 @@ class FooterSection extends StatelessWidget {
                                         },
                                         child: Text(
                                           'PARTLLC2023@GMAIL.COM',
+                                          maxLines: 1,
                                           style: GoogleFonts.openSans(
                                             color: Colors.white,
                                             fontSize: 16,

@@ -92,7 +92,7 @@ class _LandingPageState extends State<LandingPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Make an imPART',
+                                      'Make an "imPART"',
                                       style: GoogleFonts.openSans(
                                         fontSize: width * .05,
                                         fontWeight: FontWeight.bold,
@@ -161,7 +161,10 @@ class _LandingPageState extends State<LandingPage> {
                               ),
                             ),
                           ),
-                          Expanded(child: Container())
+                          SizedBox(
+                            width: width * .4,
+                            height: height,
+                          )
                         ],
                       ),
                     ),
@@ -233,6 +236,16 @@ class _LandingPageState extends State<LandingPage> {
                                     ),
                                   ),
                                 ])),
+                            const SizedBox(height: 20),
+                            Text(
+                              'PART understands that experience matters. That\'s why we recruit highly qualified and experienced teachers',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.openSans(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
                             const SizedBox(height: 20),
                             TextButton(
                                 style: TextButton.styleFrom(

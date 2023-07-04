@@ -2,12 +2,16 @@
 class Assets {
   Assets._();
 
+  static const String imagesBenefit = 'assets/images/benefit.png';
+  static const String imagesCost = 'assets/images/cost.png';
   static const String imagesFooter = 'assets/images/footer.png';
+  static const String imagesQualifications = 'assets/images/qualifications.png';
   static const String imagesSchool = 'assets/images/school.png';
   static const String imagesSlide1 = 'assets/images/slide1.jpg';
   static const String imagesSlide2 = 'assets/images/slide2.png';
   static const String imagesSlide3 = 'assets/images/slide3.png';
   static const String imagesSlide4 = 'assets/images/slide4.jpg';
+  static const String imagesSubject = 'assets/images/subject.png';
   static const String imagesTeacher = 'assets/images/teacher.png';
   static const String logoLogo = 'assets/logo/logo.png';
   static const String logoLogoNoText = 'assets/logo/logo_no_text.png';
