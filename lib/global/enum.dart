@@ -1,0 +1,1 @@
+enum Pages {home,teachers, schools, about, faq, contact, login}
