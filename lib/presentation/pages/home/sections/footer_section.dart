@@ -13,6 +13,7 @@ class FooterSection extends StatelessWidget {
   Widget build(BuildContext context) {
     var device = ResponsiveBreakpoints.of(context);
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: device.screenWidth,

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:part_website/presentation/pages/faqs/faqs_page.dart';
 import '../../presentation/pages/home/home_page.dart';
 import '../../presentation/pages/login/login_page.dart';
 
@@ -14,6 +15,22 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           path: '/auth',
           page: LoginRoute.page,
+        ),
+        AutoRoute(
+          path: '/faqs',
+          page: FAQSRoute.page,
+        ),
+        AutoRoute(
+          path: '/contact-us',
+          page: ContactUsRoute.page,
+        ),
+        AutoRoute(
+          path: '/about-us',
+          page: AboutUsRoute.page,
+        ),
+        AutoRoute(
+          path: '/teach-in',
+          page: FAQSRoute.page,
         ),
       ];
 }

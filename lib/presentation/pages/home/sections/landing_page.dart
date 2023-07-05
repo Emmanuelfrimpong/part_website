@@ -102,7 +102,7 @@ class _LandingPageState extends State<LandingPage> {
                                             end: Offset.zero,
                                           ).animate(animation),
                                           child: Text(
-                                            'Make an "imPART"',
+                                            'Be part of PART',
                                             style: GoogleFonts.openSans(
                                               fontSize: width * .05,
                                               fontWeight: FontWeight.bold,

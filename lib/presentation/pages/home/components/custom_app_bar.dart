@@ -169,7 +169,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                     onPressed: () {
                       ref.read(homeNavigationProvider.notifier).state =
                           Pages.faq;
-                      //AutoRouter.of(context).pushAndPopUntil(const HomeRoute(), predicate: (route) => false);
+                      AutoRouter.of(context).push(const FAQSRoute(), );
                     },
                     isSelected: navigationState == Pages.faq,
                     child: Text(

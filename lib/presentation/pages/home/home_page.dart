@@ -25,6 +25,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   void initState() {
     // if widget is build, then do this
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      print('Route name: ${RouteData.of(context).name}');
       _scrollController.addListener(() {
         if (_scrollController.offset >= 2) {
           ref.read(appBarOpacityProvider.notifier).state = true;

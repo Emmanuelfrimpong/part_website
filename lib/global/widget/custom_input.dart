@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/site_colors.dart';
 
-
 class CustomTextFields extends StatelessWidget {
   const CustomTextFields({
     Key? key,
@@ -64,7 +63,7 @@ class CustomTextFields extends StatelessWidget {
       textCapitalization: isCapitalized!
           ? TextCapitalization.characters
           : TextCapitalization.none,
-      style: GoogleFonts.openSans(fontWeight: FontWeight.bold),
+      style: GoogleFonts.openSans(),
       onChanged: onChanged,
       onSaved: onSaved,
       maxLines: maxLines ?? 1,
@@ -93,13 +92,13 @@ class CustomTextFields extends StatelessWidget {
         prefixIconColor: primaryColor,
         suffixIconColor: primaryColor,
         contentPadding: EdgeInsets.symmetric(
-            horizontal: 6, vertical: maxLines != null ? 15 : 5),
-        labelStyle: GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w300),
+            horizontal: 6, vertical: maxLines != null ? 15 : 20),
+        labelStyle: GoogleFonts.openSans(fontWeight: FontWeight.w500),
         labelText: label,
         hintText: hintText,
         focusColor: primaryColor,
         iconColor: Colors.grey,
-        hintStyle: GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w300),
+        hintStyle: GoogleFonts.openSans(fontWeight: FontWeight.w500),
         prefixIcon: prefixIcon != null
             ? Icon(
                 prefixIcon,

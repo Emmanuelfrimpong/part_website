@@ -2,6 +2,18 @@
 class Assets {
   Assets._();
 
+  static const String docsDriving = 'assets/docs/driving.md';
+  static const String docsEligeble = 'assets/docs/eligeble.md';
+  static const String docsFinance = 'assets/docs/finance.md';
+  static const String docsProcess = 'assets/docs/process.md';
+  static const String docsTeaching = 'assets/docs/teaching.md';
+  static const String docsVisa = 'assets/docs/visa.md';
+  static const String iconsBenefits = 'assets/icons/benefits.png';
+  static const String iconsDriving = 'assets/icons/Driving.png';
+  static const String iconsEligible = 'assets/icons/eligible.png';
+  static const String iconsProcess = 'assets/icons/Process.png';
+  static const String iconsTraining = 'assets/icons/Training.png';
+  static const String iconsVisa = 'assets/icons/visa.png';
   static const String imagesBenefit = 'assets/images/benefit.png';
   static const String imagesCost = 'assets/images/cost.png';
   static const String imagesFooter = 'assets/images/footer.png';

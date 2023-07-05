@@ -1,26 +1,58 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:part_website/services/firebase/firebase_services.dart';
+import 'package:part_website/services/state/navigation_state.dart';
 import 'package:part_website/utils/site_colors.dart';
 import 'package:responsive_framework/breakpoint.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'config/routes/router.dart';
-import 'firebase_options.dart';
+import 'global/enum.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await FirebaseApi.init();
   setPathUrlStrategy();
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  final _appRouter = AppRouter();
+class MyApp extends ConsumerStatefulWidget {
+  const MyApp({super.key});
 
-  MyApp({super.key});
+  @override
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  final _appRouter = AppRouter();
+  @override
+  void initState() {
+    // if widget is build, then do this
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      //get current route name
+      final currentRoute = _appRouter.current.name;
+      switch (currentRoute) {
+        case "LoginRoute":
+          ref.read(homeNavigationProvider.notifier).state = Pages.login;
+          break;
+        case "HomeRoute":
+          ref.read(homeNavigationProvider.notifier).state = Pages.home;
+          break;
+        case "AboutRoute":
+          ref.read(homeNavigationProvider.notifier).state = Pages.about;
+          break;
+        case "ContactRoute":
+          ref.read(homeNavigationProvider.notifier).state = Pages.contact;
+          break;
+        case "FAQSRoute":
+          ref.read(homeNavigationProvider.notifier).state = Pages.faq;
+          break;
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
