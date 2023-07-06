@@ -103,7 +103,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                       style: GoogleFonts.openSans(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
-                        color: navigationState == Pages.schools
+                        color: navigationState == Pages.teachers
                             ? primaryColor
                             : Colors.black45,
                       ),

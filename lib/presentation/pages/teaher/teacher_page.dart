@@ -75,7 +75,7 @@ class _TeacherPageState extends ConsumerState<TeacherPage> {
       'key': GlobalKey(),
     },
     {
-      'widget': const CostSection(),
+      'widget': CostSection(),
       'key': GlobalKey(),
     },
   ];
