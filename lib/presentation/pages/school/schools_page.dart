@@ -1,12 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:part_website/config/routes/router.dart';
+import 'package:part_website/generated/assets.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
+import '../../../global/functions.dart';
 import '../../../global/widget/custom_button.dart';
 import '../../../services/state/navigation_state.dart';
 import '../../../utils/site_colors.dart';
-import '../home/components/actions.dart';
 import '../home/components/custom_app_bar.dart';
 import '../home/sections/footer_section.dart';
 
@@ -46,41 +50,106 @@ class _SchoolsPageState extends ConsumerState<SchoolsPage> {
             controller: _scrollController,
             child: Column(
               children: [
-                const SizedBox(height: 100),
+                const SizedBox(height: 70),
                 Container(
                   width: device.screenWidth,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Contact Us',
-                        style: GoogleFonts.openSans(
-                          fontSize: device.screenWidth * .02,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                  height: 450,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(Assets.imagesTeach),
+                          fit: BoxFit.cover)),
                 ),
-                const ActionsPart(),
-                SizedBox(
+                const SizedBox(height: 25),
+                FutureBuilder(
+                    future: rootBundle.loadString(Assets.docsSchool),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.hasData) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20,
+                              horizontal: device.isDesktop
+                                  ? 180
+                                  : device.isTablet
+                                      ? 50
+                                      : 20),
+                          child: Markdown(
+                            data: snapshot.data!,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            selectable: true,
+                            styleSheet: MarkdownStyleSheet(
+                              p: GoogleFonts.openSans(
+                                fontSize: 16,
+                              ),
+                              h1: GoogleFonts.openSans(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                              ),
+                              h2: GoogleFonts.openSans(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                              ),
+                              h3: GoogleFonts.openSans(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                              ),
+                              h4: GoogleFonts.openSans(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                              ),
+                              h5: GoogleFonts.openSans(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                              ),
+                              h6: GoogleFonts.openSans(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              listBullet: GoogleFonts.openSans(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTapLink: (text, href, title) {
+                              launch(href!, isNewTab: true);
+                            },
+                          ),
+                        );
+                      }
+                      return SizedBox(
+                        width: device.screenWidth,
+                        height: device.screenHeight * 0.8,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }),
+                Container(
                   width: device.screenWidth,
+                  color: primaryColor,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 50, horizontal: 20),
                     child: Center(
                         child: Column(children: [
-                      Text('Get in touch with us!',
+                      Text('Are you Ready to Host a Teacher!',
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.openSans(
-                              fontSize: 30, fontWeight: FontWeight.bold)),
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold)),
                       Text(
-                          'If you have any questions, please feel free to contact us.',
+                          'If you are interested in hosting a teacher, please contact us.',
                           style: GoogleFonts.openSans(
                             fontSize: 18,
+                            color: Colors.white,
                           )),
                       const SizedBox(height: 20),
                       SizedBox(
@@ -92,7 +161,10 @@ class _SchoolsPageState extends ConsumerState<SchoolsPage> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 15),
                             radius: 0,
-                            onPressed: () {}),
+                            onPressed: () {
+                              AutoRouter.of(context)
+                                  .push(const ContactUsRoute());
+                            }),
                       )
                     ])),
                   ),

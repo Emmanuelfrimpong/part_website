@@ -11,6 +11,7 @@ import 'package:part_website/utils/site_colors.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
+import '../../../global/strings.dart';
 import '../../../services/state/navigation_state.dart';
 import '../home/components/custom_app_bar.dart';
 import '../home/sections/footer_section.dart';
@@ -97,7 +98,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             prefixIcon: MdiIcons.email,
                             keyboardType: TextInputType.emailAddress,
                             validator: (email) {
-                              if (email!.isEmpty) {
+                              if (email!.isEmpty ||
+                                  !RegExp(emailReg).hasMatch(email)) {
                                 return "Email cannot be empty";
                               }
                               return null;

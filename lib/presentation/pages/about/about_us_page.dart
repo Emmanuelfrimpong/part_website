@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:part_website/config/routes/router.dart';
+import 'package:part_website/generated/assets.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import '../../../global/widget/custom_button.dart';
 import '../../../services/state/navigation_state.dart';
@@ -45,27 +48,125 @@ class _AboutUsPageState extends ConsumerState<AboutUsPage> {
           SingleChildScrollView(
             controller: _scrollController,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 100),
+                const SizedBox(height: 70),
                 Container(
                   width: device.screenWidth,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
+                  alignment: Alignment.bottomCenter,
+                  height: 250,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(Assets.imagesAbout),
+                          fit: BoxFit.cover)),
+                  child: Container(
+                    color: Colors.black.withOpacity(.7),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 15),
+                    child: Text('About Us',
+                        style: GoogleFonts.openSans(
+                            fontSize: device.screenWidth * .05,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold)),
                   ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: device.isMobile
+                      ? device.screenWidth * .8
+                      : device.screenWidth * .7,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Contact Us',
-                        style: GoogleFonts.openSans(
-                          fontSize: device.screenWidth * .02,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                          "PART sponsors international teachers to teach in American schools—providing opportunities for global educators to make a positive \"imPART\" on their students, host schools, and local communities. PART partners with school districts to select the right teachers to teach in their schools, not only helping districts by recruiting qualified teachers to teach needed subjects, but also introducing students to a more globally connected world.",
+                          style: GoogleFonts.openSans(
+                            fontSize: 20,
+                          )),
+                      const SizedBox(height: 10),
+                      Text(
+                          "PART understands that experience matters. That's why we recruit highly qualified and experienced teachers—rigorously screening potential teachers to find the best fit for both the school district and the exchange teachers. Having a diverse and talented teaching faculty allows us to enrich and empower the global community one classroom at a time.",
+                          style: GoogleFonts.openSans(
+                            fontSize: 20,
+                          )),
                     ],
                   ),
                 ),
+                const SizedBox(height: 30),
+                Card(
+                  color: Colors.grey[200],
+                  child: SizedBox(
+                    width: device.isMobile
+                        ? device.screenWidth * .8
+                        : device.screenWidth * .7,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 40),
+                      child: Column(children: [
+                        RichText(
+                            text: TextSpan(children: [
+                          TextSpan(
+                              text:
+                                  'If you are a school official interested in learning more about what PART has to offer, please visit our ',
+                              style: GoogleFonts.openSans(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w300,
+                                  color: primaryColor)),
+                          TextSpan(
+                              text: 'Host a Teacher',
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  AutoRouter.of(context)
+                                      .push(const SchoolsRoute());
+                                },
+                              style: GoogleFonts.openSans(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline,
+                                  decorationThickness: 3,
+                                  color: primaryColor)),
+                          TextSpan(
+                              text: 'page.',
+                              style: GoogleFonts.openSans(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w300,
+                                  color: primaryColor)),
+                        ])),
+                        const SizedBox(height: 20),
+                        RichText(
+                            text: TextSpan(children: [
+                          TextSpan(
+                              text:
+                                  'If you are a teacher outside the United States and are interested in teaching in America, please visit our ',
+                              style: GoogleFonts.openSans(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w300,
+                                  color: primaryColor)),
+                          TextSpan(
+                              text: 'Teach in the USA',
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  AutoRouter.of(context)
+                                      .push(const TeacherRoute());
+                                },
+                              style: GoogleFonts.openSans(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline,
+                                  decorationThickness: 3,
+                                  color: primaryColor)),
+                          TextSpan(
+                              text:
+                                  'section to learn about the benefits and requirements.',
+                              style: GoogleFonts.openSans(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w300,
+                                  color: primaryColor)),
+                        ]))
+                      ]),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
                 const ActionsPart(),
                 SizedBox(
                   width: device.screenWidth,

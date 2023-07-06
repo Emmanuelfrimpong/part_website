@@ -111,7 +111,6 @@ class _FAQSPageState extends ConsumerState<FAQSPage> {
     super.initState();
   }
 
-  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     var device = ResponsiveBreakpoints.of(context);

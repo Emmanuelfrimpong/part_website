@@ -1,14 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:part_website/presentation/pages/teaher/sections/qualification.dart';
+import 'package:part_website/presentation/pages/teaher/sections/subject_section.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
-import '../../../global/widget/custom_button.dart';
+import '../../../generated/assets.dart';
 import '../../../services/state/navigation_state.dart';
 import '../../../utils/site_colors.dart';
-import '../home/components/actions.dart';
 import '../home/components/custom_app_bar.dart';
 import '../home/sections/footer_section.dart';
+import 'sections/benefits.dart';
+import 'sections/cost_section.dart';
+import 'sections/init_section.dart';
 
 @RoutePage()
 class TeacherPage extends ConsumerStatefulWidget {
@@ -21,6 +26,60 @@ class TeacherPage extends ConsumerStatefulWidget {
 class _TeacherPageState extends ConsumerState<TeacherPage> {
   final ScrollController _scrollController = ScrollController();
 
+  void scrollToSection(GlobalKey sectionKey) {
+    final RenderObject? renderObject =
+        sectionKey.currentContext?.findRenderObject();
+    if (renderObject is RenderBox) {
+      final RenderAbstractViewport viewport =
+          RenderAbstractViewport.of(renderObject);
+      final RevealedOffset offsetToReveal =
+          viewport.getOffsetToReveal(renderObject, 0.0);
+      _scrollController.animateTo(
+        offsetToReveal.offset - 50,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  List<Map<String, dynamic>> titles = [
+    {
+      'title': 'The Benefits',
+      'icon': Assets.iconsBenefits,
+    },
+    {
+      'title': 'Qualifications',
+      'icon': Assets.iconsQualification,
+    },
+    {
+      'title': 'Subject Areas',
+      'icon': Assets.iconsSubject,
+    },
+    {
+      'title': 'Expected Cost',
+      'icon': Assets.iconsCost,
+    },
+  ];
+
+  List<Map<String, dynamic>> data = [
+    {
+      'widget': BenefitsSection(),
+      'key': GlobalKey(),
+    },
+    {
+      'widget': QualificationSection(),
+      'key': GlobalKey(),
+    },
+    {
+      'widget': SubjectSection(),
+      'key': GlobalKey(),
+    },
+    {
+      'widget': const CostSection(),
+      'key': GlobalKey(),
+    },
+  ];
+  final GlobalKey _initKey = GlobalKey();
   @override
   void initState() {
     // if widget is build, then do this
@@ -40,6 +99,11 @@ class _TeacherPageState extends ConsumerState<TeacherPage> {
   Widget build(BuildContext context) {
     var device = ResponsiveBreakpoints.of(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () => scrollToSection(_initKey),
+        child: const Icon(Icons.arrow_upward, color: primaryColor),
+      ),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -47,54 +111,92 @@ class _TeacherPageState extends ConsumerState<TeacherPage> {
             child: Column(
               children: [
                 const SizedBox(height: 100),
-                Container(
-                  width: device.screenWidth,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Contact Us',
-                        style: GoogleFonts.openSans(
-                          fontSize: device.screenWidth * .02,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        width: device.screenWidth * 0.2,
+                        margin: const EdgeInsets.symmetric(vertical: 40),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: primaryColor,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                const ActionsPart(),
-                SizedBox(
-                  width: device.screenWidth,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 50, horizontal: 20),
-                    child: Center(
                         child: Column(children: [
-                      Text('Get in touch with us!',
-                          style: GoogleFonts.openSans(
-                              fontSize: 30, fontWeight: FontWeight.bold)),
-                      Text(
-                          'If you have any questions, please feel free to contact us.',
-                          style: GoogleFonts.openSans(
-                            fontSize: 18,
-                          )),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        width: 200,
-                        child: CustomButton(
-                            text: 'Contact Us',
-                            icon: Icons.arrow_forward,
-                            color: secondaryColor,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 15),
-                            radius: 0,
-                            onPressed: () {}),
-                      )
-                    ])),
+                          Container(
+                            color: primaryColor,
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            alignment: Alignment.center,
+                            child: Text('Sections',
+                                style: GoogleFonts.openSans(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                )),
+                          ),
+                          for (var i = 0; i < titles.length; i++)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: InkWell(
+                                onTap: () => scrollToSection(data[i]['key']),
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: primaryColor,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 15),
+                                    child: Row(
+                                      children: [
+                                        Image.asset(titles[i]['icon'],
+                                            width: 30, height: 30),
+                                        const SizedBox(width: 10),
+                                        Expanded(
+                                          child: Text(titles[i]['title'],
+                                              style: GoogleFonts.openSans(
+                                                fontSize:
+                                                    device.screenWidth < 1100
+                                                        ? 14
+                                                        : 16,
+                                                fontWeight: FontWeight.bold,
+                                                color: primaryColor,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                        ]),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                          child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            InitSection(
+                              key: _initKey,
+                            ),
+                            for (var item in data)
+                              SizedBox(
+                                key: item['key'],
+                                child: item['widget'],
+                              )
+                          ],
+                        ),
+                      )),
+                    ],
                   ),
                 ),
                 const FooterSection(),

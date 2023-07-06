@@ -1,5 +1,7 @@
 import 'package:part_website/generated/assets.dart';
 
+const String emailReg =
+    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 final List<Map<String, dynamic>> infoList = [
   {
     'image': Assets.imagesBenefit,

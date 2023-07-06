@@ -1,7 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:part_website/presentation/pages/faqs/faqs_page.dart';
+import '../../presentation/pages/about/about_us_page.dart';
+import '../../presentation/pages/contact/contact_page.dart';
 import '../../presentation/pages/home/home_page.dart';
 import '../../presentation/pages/login/login_page.dart';
+import '../../presentation/pages/school/schools_page.dart';
+import '../../presentation/pages/teaher/teacher_page.dart';
 
 part 'router.gr.dart';
 
@@ -29,8 +33,12 @@ class AppRouter extends _$AppRouter {
           page: AboutUsRoute.page,
         ),
         AutoRoute(
-          path: '/teach-in',
-          page: FAQSRoute.page,
+          path: '/teach-in-usa',
+          page: TeacherRoute.page,
+        ),
+        AutoRoute(
+          path: '/host-a-teacher',
+          page: SchoolsRoute.page,
         ),
       ];
 }

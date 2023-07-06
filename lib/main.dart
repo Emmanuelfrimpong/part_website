@@ -39,14 +39,20 @@ class _MyAppState extends ConsumerState<MyApp> {
         case "HomeRoute":
           ref.read(homeNavigationProvider.notifier).state = Pages.home;
           break;
-        case "AboutRoute":
+        case "AboutUsRoute":
           ref.read(homeNavigationProvider.notifier).state = Pages.about;
           break;
-        case "ContactRoute":
+        case "ContactUsRoute":
           ref.read(homeNavigationProvider.notifier).state = Pages.contact;
           break;
         case "FAQSRoute":
           ref.read(homeNavigationProvider.notifier).state = Pages.faq;
+          break;
+        case "SchoolsRoute":
+          ref.read(homeNavigationProvider.notifier).state = Pages.schools;
+          break;
+        case "TeacherRoute":
+          ref.read(homeNavigationProvider.notifier).state = Pages.teachers;
           break;
       }
     });

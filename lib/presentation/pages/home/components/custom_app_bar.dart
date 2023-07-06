@@ -95,37 +95,17 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                     onPressed: () {
                       ref.read(homeNavigationProvider.notifier).state =
                           Pages.teachers;
-                      //AutoRouter.of(context).pushAndPopUntil(const AboutRoute(), predicate: (route) => false);
+                      AutoRouter.of(context).push(const TeacherRoute());
                     },
                     isSelected: navigationState == Pages.teachers,
-                    child: PopupMenuButton(
-                      onOpened: () {
-                        ref.read(homeNavigationProvider.notifier).state =
-                            Pages.teachers;
-                      },
-                      itemBuilder: (context) => [],
-                      onSelected: (value) {},
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Teach in USA',
-                            style: GoogleFonts.openSans(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: navigationState == Pages.teachers
-                                  ? primaryColor
-                                  : Colors.black45,
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down,
-                            color: navigationState == Pages.teachers
-                                ? primaryColor
-                                : Colors.black45,
-                            size: navigationState == Pages.teachers ? 26 : 24,
-                          )
-                        ],
+                    child: Text(
+                      'Teach in USA',
+                      style: GoogleFonts.openSans(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: navigationState == Pages.schools
+                            ? primaryColor
+                            : Colors.black45,
                       ),
                     ),
                   ),
@@ -133,7 +113,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                     onPressed: () {
                       ref.read(homeNavigationProvider.notifier).state =
                           Pages.schools;
-                      //AutoRouter.of(context).pushAndPopUntil(const HomeRoute(), predicate: (route) => false);
+                      AutoRouter.of(context).push(const SchoolsRoute());
                     },
                     isSelected: navigationState == Pages.schools,
                     child: Text(
@@ -151,7 +131,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                     onPressed: () {
                       ref.read(homeNavigationProvider.notifier).state =
                           Pages.about;
-                      //AutoRouter.of(context).pushAndPopUntil(const HomeRoute(), predicate: (route) => false);
+                      AutoRouter.of(context).push(const AboutUsRoute());
                     },
                     isSelected: navigationState == Pages.about,
                     child: Text(
@@ -169,7 +149,9 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                     onPressed: () {
                       ref.read(homeNavigationProvider.notifier).state =
                           Pages.faq;
-                      AutoRouter.of(context).push(const FAQSRoute(), );
+                      AutoRouter.of(context).push(
+                        const FAQSRoute(),
+                      );
                     },
                     isSelected: navigationState == Pages.faq,
                     child: Text(
@@ -187,7 +169,9 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                     onPressed: () {
                       ref.read(homeNavigationProvider.notifier).state =
                           Pages.contact;
-                      //AutoRouter.of(context).pushAndPopUntil(const HomeRoute(), predicate: (route) => false);
+                      AutoRouter.of(context).push(
+                        const ContactUsRoute(),
+                      );
                     },
                     isSelected: navigationState == Pages.contact,
                     child: Text(
