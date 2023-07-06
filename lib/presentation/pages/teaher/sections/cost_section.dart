@@ -40,7 +40,7 @@ class CostSection extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text('EXPECTED COSTS',
             style: GoogleFonts.openSans(
-              fontSize: 40,
+              fontSize: device.isMobile ? 25 : 40,
               fontWeight: FontWeight.bold,
               color: primaryColor,
             )),

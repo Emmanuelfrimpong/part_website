@@ -1,19 +1,24 @@
 import 'package:auto_animated/auto_animated.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:part_website/config/routes/router.dart';
+import 'package:part_website/global/enum.dart';
+import 'package:part_website/services/state/navigation_state.dart';
 import 'package:part_website/utils/site_colors.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import '../../../../generated/assets.dart';
 
-class LandingPage extends StatefulWidget {
+class LandingPage extends ConsumerStatefulWidget {
   const LandingPage({super.key});
 
   @override
-  State<LandingPage> createState() => _LandingPageState();
+  ConsumerState<LandingPage> createState() => _LandingPageState();
 }
 
-class _LandingPageState extends State<LandingPage> {
+class _LandingPageState extends ConsumerState<LandingPage> {
   int _currentSlide = 0;
   final listOfSlides = [
     Assets.imagesSlide1,
@@ -88,93 +93,59 @@ class _LandingPageState extends State<LandingPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  AnimateIfVisible(
-                                      key: const Key('item.1'),
-                                      reAnimateOnVisibility: false,
-                                      visibleFraction: .3,
-                                      duration:
-                                          const Duration(milliseconds: 150),
-                                      builder: (BuildContext context,
-                                          Animation<double> animation) {
-                                        return SlideTransition(
-                                          position: Tween<Offset>(
-                                            begin: const Offset(0.5, 0),
-                                            end: Offset.zero,
-                                          ).animate(animation),
-                                          child: Text(
-                                            'Be part of PART',
+                                  Text(
+                                    'Be part of PART',
+                                    style: GoogleFonts.openSans(
+                                      fontSize: width * .05,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 100),
+                                    child: Column(
+                                      children: [
+                                        RichText(
+                                            text: TextSpan(children: [
+                                          TextSpan(
+                                            text:
+                                                'We provide opportunities for global Educators to make a positive ',
                                             style: GoogleFonts.openSans(
-                                              fontSize: width * .05,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
                                             ),
                                           ),
-                                        );
-                                      }),
-                                  AnimateIfVisible(
-                                      key: const Key('item.2'),
-                                      reAnimateOnVisibility: false,
-                                      visibleFraction: .3,
-                                      duration:
-                                          const Duration(milliseconds: 150),
-                                      builder: (BuildContext context,
-                                          Animation<double> animation) {
-                                        return SlideTransition(
-                                          position: Tween<Offset>(
-                                            begin: const Offset(-0.5, 0),
-                                            end: Offset.zero,
-                                          ).animate(animation),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 100),
-                                            child: Column(
-                                              children: [
-                                                RichText(
-                                                    text: TextSpan(children: [
-                                                  TextSpan(
-                                                    text:
-                                                        'We provide opportunities for global Educators to make a positive ',
-                                                    style: GoogleFonts.openSans(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text: '\"imPART\"',
-                                                    style: GoogleFonts.aBeeZee(
-                                                      fontSize: 22,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: secondaryColor,
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text:
-                                                        ' on their students, host schools, and local communities.',
-                                                    style: GoogleFonts.openSans(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ])),
-                                                const SizedBox(height: 20),
-                                                Text(
-                                                  'PART understands that experience matters. That\'s why we recruit highly qualified and experienced teachers',
-                                                  style: GoogleFonts.openSans(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ],
+                                          TextSpan(
+                                            text: '"imPART"',
+                                            style: GoogleFonts.aBeeZee(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                              color: secondaryColor,
                                             ),
                                           ),
-                                        );
-                                      }),
+                                          TextSpan(
+                                            text:
+                                                ' on their students, host schools, and local communities.',
+                                            style: GoogleFonts.openSans(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ])),
+                                        const SizedBox(height: 20),
+                                        Text(
+                                          'PART understands that experience matters. That\'s why we recruit highly qualified and experienced teachers',
+                                          style: GoogleFonts.openSans(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                   const SizedBox(height: 20),
                                   TextButton(
                                       style: TextButton.styleFrom(
@@ -186,7 +157,14 @@ class _LandingPageState extends State<LandingPage> {
                                               BorderRadius.circular(0),
                                         ),
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        ref
+                                            .read(
+                                                homeNavigationProvider.notifier)
+                                            .state = Pages.about;
+                                        AutoRouter.of(context)
+                                            .push(const AboutUsRoute());
+                                      },
                                       child: Text(
                                         ' Read More ',
                                         style: GoogleFonts.openSans(
@@ -199,7 +177,9 @@ class _LandingPageState extends State<LandingPage> {
                             ),
                           ),
                           SizedBox(
-                            width: width * .4,
+                            width: device.screenWidth < 1100
+                                ? width * .3
+                                : width * .4,
                             height: height,
                           )
                         ],
@@ -235,86 +215,58 @@ class _LandingPageState extends State<LandingPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            AnimateIfVisible(
-                                key: const Key('item.1'),
-                                reAnimateOnVisibility: false,
-                                visibleFraction: .3,
-                                duration: const Duration(milliseconds: 150),
-                                builder: (BuildContext context,
-                                    Animation<double> animation) {
-                                  return SlideTransition(
-                                    position: Tween<Offset>(
-                                      begin: const Offset(0.5, 0),
-                                      end: Offset.zero,
-                                    ).animate(animation),
-                                    child: Text(
-                                      'Make an imPART',
-                                      style: GoogleFonts.openSans(
-                                        fontSize: width * .1,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  );
-                                }),
-                            AnimateIfVisible(
-                                key: const Key('item.2'),
-                                reAnimateOnVisibility: false,
-                                visibleFraction: .3,
-                                duration: const Duration(milliseconds: 150),
-                                builder: (BuildContext context,
-                                    Animation<double> animation) {
-                                  return SlideTransition(
-                                    position: Tween<Offset>(
-                                      begin: const Offset(-0.5, 0),
-                                      end: Offset.zero,
-                                    ).animate(animation),
-                                    child: Column(
-                                      children: [
-                                        RichText(
-                                            textAlign: TextAlign.center,
-                                            text: TextSpan(children: [
-                                              TextSpan(
-                                                text:
-                                                    'We provide opportunities for global Educators to make a positive ',
-                                                style: GoogleFonts.openSans(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                text: '"imPART"',
-                                                style: GoogleFonts.aBeeZee(
-                                                  fontSize: 30,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: secondaryColor,
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                text:
-                                                    ' on their students, host schools, and local communities.',
-                                                style: GoogleFonts.openSans(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ])),
-                                        const SizedBox(height: 20),
-                                        Text(
-                                          'PART understands that experience matters. That\'s why we recruit highly qualified and experienced teachers',
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.openSans(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
+                            Text(
+                              'Be part of PART',
+                              style: GoogleFonts.openSans(
+                                fontSize: width * .1,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                RichText(
+                                    textAlign: TextAlign.center,
+                                    text: TextSpan(children: [
+                                      TextSpan(
+                                        text:
+                                            'We provide opportunities for global Educators to make a positive ',
+                                        style: GoogleFonts.openSans(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
                                         ),
-                                      ],
-                                    ),
-                                  );
-                                }),
+                                      ),
+                                      TextSpan(
+                                        text: '"imPART"',
+                                        style: GoogleFonts.aBeeZee(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                          color: secondaryColor,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text:
+                                            ' on their students, host schools, and local communities.',
+                                        style: GoogleFonts.openSans(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ])),
+                                const SizedBox(height: 20),
+                                Text(
+                                  'PART understands that experience matters. That\'s why we recruit highly qualified and experienced teachers',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.openSans(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
                             const SizedBox(height: 20),
                             TextButton(
                                 style: TextButton.styleFrom(
@@ -325,7 +277,13 @@ class _LandingPageState extends State<LandingPage> {
                                     borderRadius: BorderRadius.circular(0),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  ref
+                                      .read(homeNavigationProvider.notifier)
+                                      .state = Pages.about;
+                                  AutoRouter.of(context)
+                                      .push(const AboutUsRoute());
+                                },
                                 child: Text(
                                   ' Read More ',
                                   style: GoogleFonts.openSans(

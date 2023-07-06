@@ -32,6 +32,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       //get current route name
       final currentRoute = _appRouter.current.name;
+      print('Home Current :$currentRoute');
       switch (currentRoute) {
         case "LoginRoute":
           ref.read(homeNavigationProvider.notifier).state = Pages.login;

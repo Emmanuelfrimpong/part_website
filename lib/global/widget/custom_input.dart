@@ -92,13 +92,13 @@ class CustomTextFields extends StatelessWidget {
         prefixIconColor: primaryColor,
         suffixIconColor: primaryColor,
         contentPadding: EdgeInsets.symmetric(
-            horizontal: 6, vertical: maxLines != null ? 15 : 20),
-        labelStyle: GoogleFonts.openSans(fontWeight: FontWeight.w500),
+            horizontal: 6, vertical: maxLines != null ? 15 : 15),
+        labelStyle: GoogleFonts.openSans(fontWeight: FontWeight.w300),
         labelText: label,
         hintText: hintText,
         focusColor: primaryColor,
         iconColor: Colors.grey,
-        hintStyle: GoogleFonts.openSans(fontWeight: FontWeight.w500),
+        hintStyle: GoogleFonts.openSans(fontWeight: FontWeight.w300),
         prefixIcon: prefixIcon != null
             ? Icon(
                 prefixIcon,

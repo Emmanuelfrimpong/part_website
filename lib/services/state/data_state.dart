@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:part_website/services/firebase/firebase_services.dart';
 import 'package:part_website/services/state/navigation_state.dart';
-
 import '../../global/enum.dart';
 
 final userProvider =
@@ -62,6 +61,15 @@ class UserProvider extends StateNotifier<User?> {
             ),
           );
         }
+      }
+    }).onError((error, stackTrace) {
+      ref.read(authLoadingProvider.notifier).state = false;
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.toString()),
+          ),
+        );
       }
     });
   }

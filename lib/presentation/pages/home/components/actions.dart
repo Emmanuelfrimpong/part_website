@@ -1,17 +1,22 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
+import '../../../../config/routes/router.dart';
 import '../../../../generated/assets.dart';
+import '../../../../global/enum.dart';
+import '../../../../services/state/navigation_state.dart';
 import '../../../../utils/site_colors.dart';
 
-class ActionsPart extends StatefulWidget {
+class ActionsPart extends ConsumerStatefulWidget {
   const ActionsPart({super.key});
 
   @override
-  State<ActionsPart> createState() => _ActionSectionState();
+  ConsumerState<ActionsPart> createState() => _ActionSectionState();
 }
 
-class _ActionSectionState extends State<ActionsPart> {
+class _ActionSectionState extends ConsumerState<ActionsPart> {
   @override
   Widget build(BuildContext context) {
     var device = ResponsiveBreakpoints.of(context);
@@ -57,7 +62,11 @@ class _ActionSectionState extends State<ActionsPart> {
                                   borderRadius: BorderRadius.circular(0)),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 25, vertical: 20)),
-                          onPressed: () {},
+                          onPressed: () {
+                            ref.read(homeNavigationProvider.notifier).state =
+                                Pages.teachers;
+                            AutoRouter.of(context).push(const TeacherRoute());
+                          },
                           child: Text('Get Started',
                               style: GoogleFonts.openSans(
                                   color: Colors.white,
@@ -100,7 +109,11 @@ class _ActionSectionState extends State<ActionsPart> {
                                     borderRadius: BorderRadius.circular(0)),
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 25, vertical: 20)),
-                            onPressed: () {},
+                            onPressed: () {
+                              ref.read(homeNavigationProvider.notifier).state =
+                                  Pages.schools;
+                              AutoRouter.of(context).push(const SchoolsRoute());
+                            },
                             child: Text('Get Started',
                                 style: GoogleFonts.openSans(
                                     color: Colors.white,
@@ -139,7 +152,11 @@ class _ActionSectionState extends State<ActionsPart> {
                               borderRadius: BorderRadius.circular(0)),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 25, vertical: 20)),
-                      onPressed: () {},
+                      onPressed: () {
+                        ref.read(homeNavigationProvider.notifier).state =
+                            Pages.teachers;
+                        AutoRouter.of(context).push(const TeacherRoute());
+                      },
                       child: Text('Get Started',
                           style: GoogleFonts.openSans(
                               color: Colors.white,
@@ -174,7 +191,11 @@ class _ActionSectionState extends State<ActionsPart> {
                               borderRadius: BorderRadius.circular(0)),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 25, vertical: 20)),
-                      onPressed: () {},
+                      onPressed: () {
+                        ref.read(homeNavigationProvider.notifier).state =
+                            Pages.schools;
+                        AutoRouter.of(context).push(const SchoolsRoute());
+                      },
                       child: Text('Get Started',
                           style: GoogleFonts.openSans(
                               color: Colors.white,

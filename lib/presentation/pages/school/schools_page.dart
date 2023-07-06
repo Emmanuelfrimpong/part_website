@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:part_website/config/routes/router.dart';
 import 'package:part_website/generated/assets.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
+import '../../../global/enum.dart';
 import '../../../global/functions.dart';
 import '../../../global/widget/custom_button.dart';
 import '../../../services/state/navigation_state.dart';
@@ -83,7 +84,7 @@ class _SchoolsPageState extends ConsumerState<SchoolsPage> {
                                 fontSize: 16,
                               ),
                               h1: GoogleFonts.openSans(
-                                fontSize: 30,
+                                fontSize: device.isMobile ? 22 : 30,
                                 fontWeight: FontWeight.bold,
                                 color: primaryColor,
                               ),
@@ -162,6 +163,8 @@ class _SchoolsPageState extends ConsumerState<SchoolsPage> {
                                 horizontal: 30, vertical: 15),
                             radius: 0,
                             onPressed: () {
+                              ref.read(homeNavigationProvider.notifier).state =
+                                  Pages.contact;
                               AutoRouter.of(context)
                                   .push(const ContactUsRoute());
                             }),

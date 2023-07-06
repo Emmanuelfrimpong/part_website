@@ -7,9 +7,11 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:part_website/generated/assets.dart';
+import 'package:part_website/global/enum.dart';
 import 'package:part_website/global/widget/custom_button.dart';
 import 'package:part_website/utils/site_colors.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
+import '../../../config/routes/router.dart';
 import '../../../global/functions.dart';
 import '../../../services/state/navigation_state.dart';
 import '../home/components/actions.dart';
@@ -300,9 +302,6 @@ class SmallScreenFAQPage extends ConsumerStatefulWidget {
 }
 
 class _SmallScreenFAQPageState extends ConsumerState<SmallScreenFAQPage> {
-  PageController controller = PageController(
-    viewportFraction: 1 / 1,
-  );
   List<Map<String, dynamic>> mdFiles = [
     {
       'md': Assets.docsProcess,
@@ -407,15 +406,9 @@ class _SmallScreenFAQPageState extends ConsumerState<SmallScreenFAQPage> {
             controller: _scrollController,
             child: Column(
               children: [
-                Padding(
+                SizedBox(
                   key: _key,
-                  padding: const EdgeInsets.only(top: 50, bottom: 20, left: 20),
-                  child: Text('Frequently Asked Questions',
-                      style: GoogleFonts.openSans(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: primaryColor,
-                      )),
+                  height: device.isMobile ? 50 : 70,
                 ),
                 Container(
                   width: device.screenWidth,
@@ -505,7 +498,12 @@ class _SmallScreenFAQPageState extends ConsumerState<SmallScreenFAQPage> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 15),
                             radius: 0,
-                            onPressed: () {}),
+                            onPressed: () {
+                              ref.read(homeNavigationProvider.notifier).state =
+                                  Pages.contact;
+                              AutoRouter.of(context)
+                                  .push(const ContactUsRoute());
+                            }),
                       )
                     ])),
                   ),

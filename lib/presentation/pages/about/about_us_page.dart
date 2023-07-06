@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:part_website/config/routes/router.dart';
 import 'package:part_website/generated/assets.dart';
+import 'package:part_website/global/enum.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import '../../../global/widget/custom_button.dart';
 import '../../../services/state/navigation_state.dart';
@@ -73,7 +74,7 @@ class _AboutUsPageState extends ConsumerState<AboutUsPage> {
                 const SizedBox(height: 20),
                 SizedBox(
                   width: device.isMobile
-                      ? device.screenWidth * .8
+                      ? device.screenWidth * .9
                       : device.screenWidth * .7,
                   child: Column(
                     children: [
@@ -96,7 +97,7 @@ class _AboutUsPageState extends ConsumerState<AboutUsPage> {
                   color: Colors.grey[200],
                   child: SizedBox(
                     width: device.isMobile
-                        ? device.screenWidth * .8
+                        ? device.screenWidth * .9
                         : device.screenWidth * .7,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -193,7 +194,12 @@ class _AboutUsPageState extends ConsumerState<AboutUsPage> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 15),
                             radius: 0,
-                            onPressed: () {}),
+                            onPressed: () {
+                              ref.read(homeNavigationProvider.notifier).state =
+                                  Pages.contact;
+                              AutoRouter.of(context)
+                                  .push(const ContactUsRoute());
+                            }),
                       )
                     ])),
                   ),

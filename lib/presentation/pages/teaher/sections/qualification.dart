@@ -24,7 +24,7 @@ class QualificationSection extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text('QUALIFICATIONS',
             style: GoogleFonts.openSans(
-              fontSize: 40,
+              fontSize: device.isMobile ? 25 : 40,
               fontWeight: FontWeight.bold,
               color: primaryColor,
             )),

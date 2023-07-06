@@ -50,9 +50,160 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
             ),
             const Spacer(),
             if (device.screenWidth < 1000)
-              PopupMenuButton(
-                  itemBuilder: (context) => [],
-                  onSelected: (value) {},
+              PopupMenuButton<PageRouteInfo>(
+                  constraints: const BoxConstraints(minWidth: 300),
+                  position: PopupMenuPosition.under,
+                  itemBuilder: (context) => [
+                        PopupMenuItem(
+                          value: const HomeRoute(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                              'Home',
+                              style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: navigationState == Pages.home
+                                    ? primaryColor
+                                    : Colors.black45,
+                              ),
+                            ),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: const TeacherRoute(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                              'Teach in USA',
+                              style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: navigationState == Pages.teachers
+                                    ? primaryColor
+                                    : Colors.black45,
+                              ),
+                            ),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: const SchoolsRoute(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                              'Host a Teacher',
+                              style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: navigationState == Pages.schools
+                                    ? primaryColor
+                                    : Colors.black45,
+                              ),
+                            ),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: const AboutUsRoute(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                              'About Us',
+                              style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: navigationState == Pages.about
+                                    ? primaryColor
+                                    : Colors.black45,
+                              ),
+                            ),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: const ContactUsRoute(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                              'Contact',
+                              style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: navigationState == Pages.contact
+                                    ? primaryColor
+                                    : Colors.black45,
+                              ),
+                            ),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: const FAQSRoute(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                              'FAQs',
+                              style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: navigationState == Pages.faq
+                                    ? primaryColor
+                                    : Colors.black45,
+                              ),
+                            ),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: const LoginRoute(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                              'Login',
+                              style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: navigationState == Pages.login
+                                    ? primaryColor
+                                    : Colors.black45,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                  onSelected: (value) {
+                    switch (value.routeName) {
+                      case HomeRoute.name:
+                        ref.read(homeNavigationProvider.notifier).state =
+                            Pages.home;
+                        break;
+                      case TeacherRoute.name:
+                        ref.read(homeNavigationProvider.notifier).state =
+                            Pages.teachers;
+                        break;
+                      case SchoolsRoute.name:
+                        ref.read(homeNavigationProvider.notifier).state =
+                            Pages.schools;
+                        break;
+                      case AboutUsRoute.name:
+                        ref.read(homeNavigationProvider.notifier).state =
+                            Pages.about;
+                        break;
+                      case ContactUsRoute.name:
+                        ref.read(homeNavigationProvider.notifier).state =
+                            Pages.contact;
+                        break;
+                      case FAQSRoute.name:
+                        ref.read(homeNavigationProvider.notifier).state =
+                            Pages.faq;
+                        break;
+                      case LoginRoute.name:
+                        ref.read(homeNavigationProvider.notifier).state =
+                            Pages.login;
+                        break;
+                    }
+                    final _appRouter = AppRouter();
+                    if (_appRouter.current.name != value.routeName) {
+                      AutoRouter.of(context)
+                          .pushAndPopUntil(value, predicate: (route) => false);
+                    }
+                  },
                   child: Container(
                     margin: const EdgeInsets.only(right: 20),
                     decoration: BoxDecoration(
@@ -61,7 +212,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                     child: Icon(
                       MdiIcons.menu,
                       color: Colors.white,
@@ -73,10 +224,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                 children: [
                   CustomAppBarItem(
                     onPressed: () {
-                      ref.read(homeNavigationProvider.notifier).state =
-                          Pages.home;
-                      AutoRouter.of(context).pushAndPopUntil(const HomeRoute(),
-                          predicate: (route) => false);
+                      pushToPage(Pages.home, const HomeRoute());
                     },
                     isSelected: navigationState == Pages.home,
                     child: Text(
@@ -93,9 +241,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                   // add dropdown menu here
                   CustomAppBarItem(
                     onPressed: () {
-                      ref.read(homeNavigationProvider.notifier).state =
-                          Pages.teachers;
-                      AutoRouter.of(context).push(const TeacherRoute());
+                      pushToPage(Pages.teachers, const TeacherRoute());
                     },
                     isSelected: navigationState == Pages.teachers,
                     child: Text(
@@ -111,9 +257,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                   ),
                   CustomAppBarItem(
                     onPressed: () {
-                      ref.read(homeNavigationProvider.notifier).state =
-                          Pages.schools;
-                      AutoRouter.of(context).push(const SchoolsRoute());
+                      pushToPage(Pages.schools, const SchoolsRoute());
                     },
                     isSelected: navigationState == Pages.schools,
                     child: Text(
@@ -129,9 +273,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                   ),
                   CustomAppBarItem(
                     onPressed: () {
-                      ref.read(homeNavigationProvider.notifier).state =
-                          Pages.about;
-                      AutoRouter.of(context).push(const AboutUsRoute());
+                      pushToPage(Pages.about, const AboutUsRoute());
                     },
                     isSelected: navigationState == Pages.about,
                     child: Text(
@@ -147,11 +289,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                   ),
                   CustomAppBarItem(
                     onPressed: () {
-                      ref.read(homeNavigationProvider.notifier).state =
-                          Pages.faq;
-                      AutoRouter.of(context).push(
-                        const FAQSRoute(),
-                      );
+                      pushToPage(Pages.faq, const FAQSRoute());
                     },
                     isSelected: navigationState == Pages.faq,
                     child: Text(
@@ -167,11 +305,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                   ),
                   CustomAppBarItem(
                     onPressed: () {
-                      ref.read(homeNavigationProvider.notifier).state =
-                          Pages.contact;
-                      AutoRouter.of(context).push(
-                        const ContactUsRoute(),
-                      );
+                      pushToPage(Pages.contact, const ContactUsRoute());
                     },
                     isSelected: navigationState == Pages.contact,
                     child: Text(
@@ -203,9 +337,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                                   width: 1),
                               borderRadius: BorderRadius.circular(0))),
                       onPressed: () {
-                        ref.read(homeNavigationProvider.notifier).state =
-                            Pages.login;
-                        AutoRouter.of(context).push(const LoginRoute());
+                        pushToPage(Pages.login, const LoginRoute());
                       },
                       child: Text(
                         'Login',
@@ -225,6 +357,15 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
         ),
       ),
     );
+  }
+
+  void pushToPage(Pages pages, PageRouteInfo page) {
+    ref.read(homeNavigationProvider.notifier).state = pages;
+    //get current rout name
+    final String name = AutoRouter.of(context).current.name;
+    if (name != page.routeName) {
+      AutoRouter.of(context).pushAndPopUntil(page, predicate: (route) => false);
+    } else {}
   }
 }
 

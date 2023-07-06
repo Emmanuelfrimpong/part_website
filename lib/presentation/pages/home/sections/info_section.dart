@@ -1,4 +1,3 @@
-import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,26 +16,13 @@ class InfoSection extends StatelessWidget {
       color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
       child: Column(children: [
-        AnimateIfVisible(
-            key: const Key('item.5'),
-            reAnimateOnVisibility: false,
-            visibleFraction: .5,
-            duration: const Duration(milliseconds: 200),
-            builder: (BuildContext context, Animation<double> animation) {
-              return SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(0, -2),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: Text(
-                  'PALMETTO AGENCY FOR RECRUITING TEACHERS - PART',
-                  style: GoogleFonts.openSans(
-                      fontSize: device.screenWidth * .025,
-                      fontWeight: FontWeight.bold,
-                      color: primaryColor),
-                ),
-              );
-            }),
+        Text(
+          'PALMETTO AGENCY FOR RECRUITING TEACHERS - PART',
+          style: GoogleFonts.openSans(
+              fontSize: device.screenWidth * .025,
+              fontWeight: FontWeight.bold,
+              color: primaryColor),
+        ),
         const SizedBox(height: 20),
         Wrap(
             spacing: 20,
